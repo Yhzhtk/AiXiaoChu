@@ -1,6 +1,7 @@
 package com.yh.aixiaochu;
 
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -26,6 +27,10 @@ public class SystemUtil {
 	 * 初始化数据
 	 */
 	public static void init(){
+		File p = new File(screenpath);
+		if(!p.exists()){
+			p.mkdirs();
+		}
 		screenName = screenpath + "screen.png";
 		shotCmdBytes = ("/system/bin/screencap -p " + screenName).getBytes();
 		options = new BitmapFactory.Options();
@@ -116,7 +121,7 @@ public class SystemUtil {
 	 * @return
 	 */
 	private static String[] getDragEvents(int x1, int y1, int x2, int y2) {
-		String[] events = new String[16];
+		String[] events = new String[17];
 		// 第一点
 		events[0] = "sendevent /dev/input/event1 3 57 0";
 		events[1] = "sendevent /dev/input/event1 3 53 " + x1;
@@ -125,17 +130,19 @@ public class SystemUtil {
 		events[4] = "sendevent /dev/input/event1 3 50 2";
 		events[5] = "sendevent /dev/input/event1 0 2 0";
 		events[6] = "sendevent /dev/input/event1 0 0 0";
+		// 延时
+		events[7] = "sleep 0.1";
 		// 第二点
-		events[7] = "sendevent /dev/input/event1 3 57 0";
-		events[8] = "sendevent /dev/input/event1 3 53 " + x2;
-		events[9] = "sendevent /dev/input/event1 3 54 " + y2;
-		events[10] = "sendevent /dev/input/event1 3 58 31";
-		events[11] = "sendevent /dev/input/event1 3 50 2";
-		events[12] = "sendevent /dev/input/event1 0 2 0";
-		events[13] = "sendevent /dev/input/event1 0 0 0";
+		events[8] = "sendevent /dev/input/event1 3 57 0";
+		events[9] = "sendevent /dev/input/event1 3 53 " + x2;
+		events[10] = "sendevent /dev/input/event1 3 54 " + y2;
+		events[11] = "sendevent /dev/input/event1 3 58 31";
+		events[12] = "sendevent /dev/input/event1 3 50 2";
+		events[13] = "sendevent /dev/input/event1 0 2 0";
+		events[14] = "sendevent /dev/input/event1 0 0 0";
 		// 确认
-		events[14] = "sendevent /dev/input/event1 0 2 0";
-		events[15] = "sendevent /dev/input/event1 0 0 0";
+		events[15] = "sendevent /dev/input/event1 0 2 0";
+		events[16] = "sendevent /dev/input/event1 0 0 0";
 		return events;
 	}
 	

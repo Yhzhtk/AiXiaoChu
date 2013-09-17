@@ -57,9 +57,9 @@ public class GamePlayService extends Service {
 					e.printStackTrace();
 				}
 				if(res == 1){
-					Log.i("PalyGame", "run ok, sleep 10 ms");
+					Log.i("PalyGame", "run ok, sleep 500 ms");
 					try {
-						Thread.sleep(10);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

@@ -36,5 +36,4 @@ public class run_py {
 		Log.i("Time", "GetStep Time: " + (end - start));
 		return pos;
 	}
-
 }
