@@ -7,11 +7,22 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
+/**
+ * 重写sendevent.c
+ * @author gudh
+ * 
+ */
 public class Sendevent {
 
+	// 使用nid获取字节流
 	private static ByteBuffer buffer4 = ByteBuffer.allocate(4);
 	private static ByteBuffer buffer2 = ByteBuffer.allocate(2);
 
+	/**
+	 * 根据命令行参数获取字节数组
+	 * @param arg
+	 * @return
+	 */
 	public static byte[] getSendArgs(String arg) {
 		String[] infos = arg.split(" +");
 		System.out.println(arg);
@@ -19,6 +30,13 @@ public class Sendevent {
 				Short.parseShort(infos[3]), Integer.parseInt(infos[4]));
 	}
 
+	/**
+	 * 获取发送到命令，结构体的对照
+	 * @param type
+	 * @param code
+	 * @param value
+	 * @return
+	 */
 	public static byte[] getSendArgs(short type, short code, int value) {
 		byte[] bytes = new byte[16];
 
@@ -50,7 +68,7 @@ public class Sendevent {
 	}
 
 	/**
-	 * set time
+	 * 设置时间，根据c语言的struct而来
 	 * 
 	 * @param bytes
 	 */
@@ -71,6 +89,9 @@ public class Sendevent {
 		}
 	}
 
+	/**
+	 * 循环发送单击命令测试
+	 */
 	public static void TestClick() {
 		while (true) {
 			try {
