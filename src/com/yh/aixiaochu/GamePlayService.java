@@ -1,5 +1,7 @@
 package com.yh.aixiaochu;
 
+import com.yh.aixiaochu.system.Sendevent;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -27,16 +29,19 @@ public class GamePlayService extends Service {
 	@Override
 	public void onStart(Intent intent, int startid) {
 		Log.i("PlayGame", "onStart");
-		play = new Play();
-		play.stop_flag = false;
-		play.start();
+		Sendevent.TestClick();
+//		play = new Play();
+//		play.stop_flag = false;
+//		play.start();
 		GameUtil.reset();
 	}
 	
 	@Override
 	public void onDestroy() {
 		Log.i("PlayGame", "onDestroy");
-		play.stop_flag = true;
+		if(play != null){
+			play.stop_flag = true;
+		}
 	}
 	
 	class Play extends Thread{
