@@ -16,10 +16,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// ÉèÖÃ¿É½ØÆÁ
+		// è®¾ç½®å¯æˆªå±
 		getWindow().getDecorView().setDrawingCacheEnabled(true);
 
-		// ³õÊ¼»¯ÏµÍ³¹¤¾ß
+		// åˆå§‹åŒ–ç³»ç»Ÿå·¥å…·
 		SystemUtil.init();
 		
 //		new Thread(new Runnable() {
@@ -48,11 +48,11 @@ public class MainActivity extends Activity {
 		TextView s = (TextView) findViewById(R.id.statusView);
 		String status = s.getText().toString();
 		if (status.equals(getResources().getString(R.string.runtext))) {
-			// ÕıÔÚÔËĞĞÇĞ»»µ½²»ÔËĞĞ
+			// æ­£åœ¨è¿è¡Œåˆ‡æ¢åˆ°ä¸è¿è¡Œ
 			stopService(new Intent(this, GamePlayService.class));
 			s.setText(getResources().getString(R.string.noruntext));
 		} else {
-			// Î´ÔËĞĞÇĞ»¨µ½ÔËĞĞ
+			// æœªè¿è¡Œåˆ‡èŠ±åˆ°è¿è¡Œ
 			startService(new Intent(this, GamePlayService.class));
 			s.setText(getResources().getString(R.string.runtext));
 		}

@@ -4,28 +4,28 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 /**
- * Ê¶±ğÔ­Ê¼Í¼Æ¬Ëã·¨
+ * è¯†åˆ«åŸå§‹å›¾ç‰‡ç®—æ³•
  * @author gudh
  *
  */
 public class xiaochu_py {
 
-	static int[] start_pos = { 5, 222 }; // ¿ªÊ¼µÄÎ»ÖÃ
-	static int[] block_size = { 67, 67 }; // ¿é´óĞ¡
-	static int[] rel_pos = { 33, 28 }; // Ïà¶Ô¿éÍ·Î»ÖÃ
-	static int[][] colors = { { 255, 255, 255 }, // °×
-			{ 164, 130, 213 }, // ×Ï
-			{ 247, 214, 82 }, // »Æ
-			{ 244, 160, 90 }, // ÍÁ
-			{ 90, 186, 238 }, // À¶
-			{ 247, 69, 95 }, // ºì
-			{ 173, 235, 82 } // ÂÌ
+	static int[] start_pos = { 5, 222 }; // å¼€å§‹çš„ä½ç½®
+	static int[] block_size = { 67, 67 }; // å—å¤§å°
+	static int[] rel_pos = { 33, 28 }; // ç›¸å¯¹å—å¤´ä½ç½®
+	static int[][] colors = { { 255, 255, 255 }, // ç™½
+			{ 164, 130, 213 }, // ç´«
+			{ 247, 214, 82 }, // é»„
+			{ 244, 160, 90 }, // åœŸ
+			{ 90, 186, 238 }, // è“
+			{ 247, 69, 95 }, // çº¢
+			{ 173, 235, 82 } // ç»¿
 	};
 	static String[] colornames = { "ba", "zh", "hu", "tu", "la", "ho", "lv" };
-	static int[] ax = { 35, 35, 35 }; // ÔÊĞíµÄÎó²î
+	static int[] ax = { 35, 35, 35 }; // å…è®¸çš„è¯¯å·®
 
 	public static int[] get_pos(int i, int j) {
-		// //'»ñÈ¡¿éÄÚÅĞ¶ÏµÄµã//'
+		// //'è·å–å—å†…åˆ¤æ–­çš„ç‚¹//'
 		int[] xy = new int[2];
 		xy[0] = start_pos[0] + i * block_size[0] + rel_pos[0];
 		xy[1] = start_pos[1] + j * block_size[1] + rel_pos[1];
@@ -33,7 +33,7 @@ public class xiaochu_py {
 	}
 
 	public static int[] get_rc_pos(int[] rc) {
-		// '»ñÈ¡rcµÄµã£¬×¢Òâºá×İÊÇ·´µÄ//'
+		// 'è·å–rcçš„ç‚¹ï¼Œæ³¨æ„æ¨ªçºµæ˜¯åçš„//'
 		int[] xy = new int[2];
 		xy[0] = start_pos[0] + rc[1] * block_size[0] + rel_pos[0];
 		xy[1] = start_pos[1] + rc[0] * block_size[1] + rel_pos[1];
@@ -41,7 +41,7 @@ public class xiaochu_py {
 	}
 
 	public static int[] get_block(int i, int j) {
-		// '»ñÈ¡¿éµÄÇøÓò//'
+		// 'è·å–å—çš„åŒºåŸŸ//'
 		int[] xywh = new int[4];
 		xywh[0] = start_pos[0] + i * block_size[0];
 		xywh[1] = start_pos[1] + j * block_size[1];
@@ -51,7 +51,7 @@ public class xiaochu_py {
 	}
 
 	public static boolean similar_color(int[] p, int[] color) {
-		// 'ÅĞ¶ÏÊÇ·ñÊÇÏàËÆ//'
+		// 'åˆ¤æ–­æ˜¯å¦æ˜¯ç›¸ä¼¼//'
 		// print p, color
 		for (int i = 0; i < 3; i++) {
 			if (Math.abs(p[i] - color[i]) >= ax[i]) {
@@ -62,7 +62,7 @@ public class xiaochu_py {
 	}
 
 	public static int get_color(Bitmap img, int i, int j) {
-		// //'»ñÈ¡ÏñËØµãµÄÑÕÉ«//'
+		// //'è·å–åƒç´ ç‚¹çš„é¢œè‰²//'
 		int[] p = get_pos(i, j);
 
 		int rgb = img.getPixel(p[0], p[1]);
@@ -80,7 +80,7 @@ public class xiaochu_py {
 	}
 
 	public static int[][] get_pic_info(Bitmap img) {
-		// //'»ñÈ¡ÏñËØ¾ØÕó//'
+		// //'è·å–åƒç´ çŸ©é˜µ//'
 		int[][] mat = new int[7][7];
 		int blank_c = 0;
 		for (int j = 0; j < 7; j++) {
@@ -101,7 +101,7 @@ public class xiaochu_py {
 	}
 
 	public static void print_mat(int[][] mat) {
-		// 'Êä³ö½á¹û¾ØÕó//'
+		// 'è¾“å‡ºç»“æœçŸ©é˜µ//'
 		StringBuffer sb = new StringBuffer();
 		sb.append(". | 0  1  2  3  4  5  6\n");
 		int i = 0;

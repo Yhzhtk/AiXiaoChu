@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Ò»ÂÖÒ»ÂÖµÄ²Ù×÷
+ * ä¸€è½®ä¸€è½®çš„æ“ä½œ
  * @author gudh
  *
  */
 public class GetRound {
 	
 	public static int get_color(int[][] mat, int[] pos) {
-		// '»ñÈ¡ÑÕÉ«ĞÅÏ¢//'
+		// 'è·å–é¢œè‰²ä¿¡æ¯//'
 		if (pos[0] < 0 || pos[1] < 0) {
 			return -1;
 		}
@@ -23,7 +23,7 @@ public class GetRound {
 
 	public static List<ResBean> get_avail(int[][] mat, List<ResBean> arounds,
 			int[] compare_pos) {
-		// '»ñÈ¡¿ÉÓÃµÄÒÆ¶¯ĞÅÏ¢//'
+		// 'è·å–å¯ç”¨çš„ç§»åŠ¨ä¿¡æ¯//'
 		List<ResBean> res = new ArrayList<ResBean>();
 		int color = get_color(mat, compare_pos);
 		for (ResBean roun : arounds) {
@@ -36,13 +36,13 @@ public class GetRound {
 	}
 	
 	public static List<ResBean> get_middle(int[] pos1, int[] pos2, int[][] mat) {
-		// '''»ñÈ¡Á½¸öÏà¸ôµÄÇé¿öÏÂ£¬¿ÉÄÜµÄµÚÈı¸öµÄÒÆ¶¯ĞÅÏ¢'''
+		// '''è·å–ä¸¤ä¸ªç›¸éš”çš„æƒ…å†µä¸‹ï¼Œå¯èƒ½çš„ç¬¬ä¸‰ä¸ªçš„ç§»åŠ¨ä¿¡æ¯'''
 		int[] p1 = pos1;
 		int[] p2 = pos2;
 		ResBean bean = null;
 		List<ResBean> arounds = new ArrayList<ResBean>();
-		if (pos1[1] == pos2[1]) { // ÊúÅÅ
-			// p1ÊÇĞ¡µÄÄÇ¸ö
+		if (pos1[1] == pos2[1]) { // ç«–æ’
+			// p1æ˜¯å°çš„é‚£ä¸ª
 			if (p1[0] > p2[0]) {
 				p1 = pos2;
 				p2 = pos1;
@@ -56,7 +56,7 @@ public class GetRound {
 			bean.addZhanyong(p2[0], p1[1]);
 			bean.addZhanyong(p1[0] + 1, p1[1] + 1);
 			arounds.add(bean);
-		} else if (pos1[0] == pos2[0]) { // ºáÅÅ
+		} else if (pos1[0] == pos2[0]) { // æ¨ªæ’
 			if (p1[1] > p2[1]) {
 				p1 = pos2;
 				p2 = pos1;
@@ -77,7 +77,7 @@ public class GetRound {
 	}
 
 	public static List<ResBean> get_arround(int[] pos1, int[] pos2, int[][] mat) {
-		// '''»ñÈ¡Á½¸öÏàÁ¬µÄÇé¿öÏÂ£¬¿ÉÄÜµÄµÚÈı¸öµÄÒÆ¶¯ĞÅÏ¢·µ»Ø½á¹ûÎª(ÒÆ¶¯Î»ÖÃ1£¬ ÒÆ¶¯Î»ÖÃ2£¬ ÊÜÓ°ÏìµÄĞĞ)'''
+		// '''è·å–ä¸¤ä¸ªç›¸è¿çš„æƒ…å†µä¸‹ï¼Œå¯èƒ½çš„ç¬¬ä¸‰ä¸ªçš„ç§»åŠ¨ä¿¡æ¯è¿”å›ç»“æœä¸º(ç§»åŠ¨ä½ç½®1ï¼Œ ç§»åŠ¨ä½ç½®2ï¼Œ å—å½±å“çš„è¡Œ)'''
 		int[] p1 = pos1;
 		int[] p2 = pos2;
 		ResBean bean = null;
@@ -85,13 +85,13 @@ public class GetRound {
 		int[] size = new int[2];
 		size[0] = mat.length;
 		size[1] = mat[0].length;
-		if (pos1[1] == pos2[1]) { // ÊúÅÅ
-			// p1ÊÇĞ¡µÄÄÇ¸ö
+		if (pos1[1] == pos2[1]) { // ç«–æ’
+			// p1æ˜¯å°çš„é‚£ä¸ª
 			if (p1[0] > p2[0]) {
 				p1 = pos2;
 				p2 = pos1;
 			}
-			// ÉÏ±ß
+			// ä¸Šè¾¹
 			if (p1[0] > 0) {
 				bean = new ResBean(p1[0] - 1, p1[1], p1[0] - 1, p1[1] - 1);
 				bean.addZhanyong(p2[0], p1[1]);
@@ -107,7 +107,7 @@ public class GetRound {
 				bean.addZhanyong(p2[0], p1[1]);
 				arounds.add(bean);
 			}
-			// ÏÂ±ß
+			// ä¸‹è¾¹
 			if (p2[0] < size[0] - 1) {
 				bean = new ResBean(p2[0] + 1, p2[1], p2[0] + 1, p2[1] - 1);
 				bean.addZhanyong(p2[0] + 1, p1[1]);
@@ -124,12 +124,12 @@ public class GetRound {
 				arounds.add(bean);
 
 			}
-		} else if (pos1[0] == pos2[0]) { // ºáÅÅ
+		} else if (pos1[0] == pos2[0]) { // æ¨ªæ’
 			if (p1[1] > p2[1]) {
 				p1 = pos2;
 				p2 = pos1;
 			}
-			// ×ó±ß
+			// å·¦è¾¹
 			if (p1[1] > 0) {
 				bean = new ResBean(p1[0], p1[1] - 1, p1[0] - 1, p1[1] - 1);
 				bean.addZhanyong(p1[0], p1[1] - 1);
@@ -150,7 +150,7 @@ public class GetRound {
 				bean.addZhanyong(p1[0], p2[1]);
 				arounds.add(bean);
 			}
-			// ÓÒ±ß
+			// å³è¾¹
 			if (p2[1] < size[1] - 1) {
 				bean = new ResBean(p2[0], p2[1] + 1, p2[0] - 1, p2[1] + 1);
 				bean.addZhanyong(p1[0], p1[1]);

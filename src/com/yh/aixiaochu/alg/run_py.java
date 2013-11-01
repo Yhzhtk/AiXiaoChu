@@ -7,14 +7,14 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 /**
- * 算法调用模块
+ * 绠楁硶璋冪敤妯″潡
  * @author gudh
  *
  */
 public class run_py {
 	
 	/**
-	 * 根据截图数据，获取下一步应该如何消除的步骤
+	 * 鏍规嵁鎴浘鏁版嵁锛岃幏鍙栦笅涓�姝ュ簲璇ュ浣曟秷闄ょ殑姝ラ
 	 * @param img
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class run_py {
 		List<int[][]> pos = new ArrayList<int[][]>();
 		for (ResBean r : res) {
 			r.print();
-			// 坐标和序号是反的
+			// 鍧愭爣鍜屽簭鍙锋槸鍙嶇殑
 			int[] m = xiaochu_py.get_rc_pos(r.start);
 			int[] n = xiaochu_py.get_rc_pos(r.end);
 			Log.i("Res", new StringBuffer().append(m[0]).append(" ").append(m[1]).append("    ").append(m[0]).append(" ").append(m[1]).toString());

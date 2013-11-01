@@ -8,19 +8,19 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Ïû³ıËã·¨£¬¼ÆËã²½Öè
+ * æ¶ˆé™¤ç®—æ³•ï¼Œè®¡ç®—æ­¥éª¤
  * @author gudh
  *
  */
 public class xcalg_py {
 
 	public static List<ResBean> calculate_step(int[][] mat) {
-		// '¼ÆËãÏÂÒ»²½µÄËùÓĞ¿ÉĞĞÇé¿ö//'
+		// 'è®¡ç®—ä¸‹ä¸€æ­¥çš„æ‰€æœ‰å¯è¡Œæƒ…å†µ//'
 		int ws = mat.length;
 		int hs = mat[0].length;
 
 		List<ResBean> res = new ArrayList<ResBean>();
-		// ´ÓÏÂÍùÉÏ£¬´ÓÓÒÍù×ó
+		// ä»ä¸‹å¾€ä¸Šï¼Œä»å³å¾€å·¦
 		for (int j = 0; j < hs; j++) {
 			int[] last = { -1, -1 };
 			int[] last2 = { -1, -1 };
@@ -29,11 +29,11 @@ public class xcalg_py {
 					int m1 = mat[last[0]][last[1]];
 					int m2 = mat[i][j];
 					if (m1 == m2) {
-						// Á½±ß
+						// ä¸¤è¾¹
 						List<ResBean> a = GetRound.get_arround( new int[] { i, j }, last, mat);
 						res.addAll(a);
 					} else if (last2[0] != -1 && last2[1] != -1) {
-						// ÖĞ¼ä
+						// ä¸­é—´
 						int m0 = mat[last2[0]][last2[1]];
 						if (m0 == m2) {
 							List<ResBean> a = GetRound.get_middle( new int[] { i, j }, last2,mat);
@@ -48,7 +48,7 @@ public class xcalg_py {
 				}
 			}
 		}
-		// ´ÓÓÒÍù×ó£¬´ÓÏÂÍùÉÏ
+		// ä»å³å¾€å·¦ï¼Œä»ä¸‹å¾€ä¸Š
 		for (int i = 0; i < ws; i++) {
 			int[] last = { -1, -1 };
 			int[] last2 = { -1, -1 };
@@ -57,11 +57,11 @@ public class xcalg_py {
 					int m1 = mat[last[0]][last[1]];
 					int m2 = mat[i][j];
 					if (m1 == m2) {
-						// Á½±ß
+						// ä¸¤è¾¹
 						List<ResBean> a = GetRound.get_arround( new int[] { i, j }, last, mat);
 						res.addAll(a);
 					} else if (last2[0] != -1 && last2[1] != -1) {
-						// ÖĞ¼ä
+						// ä¸­é—´
 						int m0 = mat[last2[0]][last2[1]];
 						if (m0 == m2) {
 							List<ResBean> a = GetRound.get_middle( new int[] { i, j }, last2,mat);
@@ -86,7 +86,7 @@ public class xcalg_py {
 
 	public static boolean is_down_ok(HashMap<Integer, Integer> ys,
 			ResBean needlocs) {
-		// 'ÊÇ·ñÔÚÏÂÃæ£¬Èç¹ûÔÚÏÂÃæ¿ÉÒÔ¶à¸öÔËĞĞ//'
+		// 'æ˜¯å¦åœ¨ä¸‹é¢ï¼Œå¦‚æœåœ¨ä¸‹é¢å¯ä»¥å¤šä¸ªè¿è¡Œ//'
 		for (int[] loc : needlocs.zhanyong) {
 			if (ys.containsKey(loc[1]) && ys.get(loc[1]) >= loc[0]) {
 				return false;
@@ -96,7 +96,7 @@ public class xcalg_py {
 	}
 
 	public static void add_ys(HashMap<Integer, Integer> ys, ResBean needlocs) {
-		// 'Ìí¼ÓºÏ²¢,½«ÏàÍ¬y¸ü´óµÄx´æÈë//'
+		// 'æ·»åŠ åˆå¹¶,å°†ç›¸åŒyæ›´å¤§çš„xå­˜å…¥//'
 		for (int[] loc : needlocs.zhanyong) {
 			if (ys.containsKey(loc[1])) {
 				if (ys.get(loc[1]) < loc[0]) {
@@ -110,10 +110,10 @@ public class xcalg_py {
 
 	@SuppressLint("UseSparseArrays")
 	public static List<ResBean> get_optimal(List<ResBean> avails) {
-		// '»ñÈ¡Ò»ÕÅÍ¼×îÓÅµÄ²½Öè¼¯£¬ÓĞË³ĞòµÄ//'
+		// 'è·å–ä¸€å¼ å›¾æœ€ä¼˜çš„æ­¥éª¤é›†ï¼Œæœ‰é¡ºåºçš„//'
 		List<ResBean> res = new ArrayList<ResBean>();
 		HashMap<Integer, Integer> ys = new HashMap<Integer, Integer>();
-		// ÏÈÌí¼ÓÍ¬º¬¶à¸öµÄ
+		// å…ˆæ·»åŠ åŒå«å¤šä¸ªçš„
 		// for (ResBean ava : avails){
 		// if (avails.(ava) > 1){
 		// if (!is_down_ok(ys, ava[2])){
@@ -123,7 +123,7 @@ public class xcalg_py {
 		// }
 		// }
 		for (ResBean ava : avails) {
-			// Èç¹ûxĞ¡ÓÚ·¶Î§£¬ÔòÌø¹ı
+			// å¦‚æœxå°äºèŒƒå›´ï¼Œåˆ™è·³è¿‡
 			if (!is_down_ok(ys, ava)) {
 				continue;
 			}

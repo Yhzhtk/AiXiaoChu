@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * ÍæÓÎÏ·µÄService
+ * ç©æ¸¸æˆçš„Service
  * @author gudh
  *
  */
@@ -48,13 +48,13 @@ public class GamePlayService extends Service {
 	}
 	
 	/**
-	 * ÍæÓÎÏ·µÄÏÖ³¡
+	 * ç©æ¸¸æˆçš„ç°åœº
 	 * @author gudh
-	 * Í¨¹ıÏß³ÌÀ´Íê³ÉÑ­»·½ØÍ¼Ä£Äâ²Ù×÷
+	 * é€šè¿‡çº¿ç¨‹æ¥å®Œæˆå¾ªç¯æˆªå›¾æ¨¡æ‹Ÿæ“ä½œ
 	 */
 	class Play extends Thread{
 		
-		// ÊÇ·ñÍ£Ö¹µÄ±êÖ¾
+		// æ˜¯å¦åœæ­¢çš„æ ‡å¿—
 		public boolean stop_flag = false;
 		
 		@Override
@@ -66,13 +66,13 @@ public class GamePlayService extends Service {
 			while(!stop_flag){
 				start = System.currentTimeMillis();
 				try{
-					// ÔËĞĞÒ»´ÎÊ¶±ğÄ£Äâ£¬·µ»Ø½á¹û
+					// è¿è¡Œä¸€æ¬¡è¯†åˆ«æ¨¡æ‹Ÿï¼Œè¿”å›ç»“æœ
 					res = GameUtil.run_time();
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 				
-				// ¶Ô·µ»ØµÄ½á¹û½øĞĞ²»Í¬µÄÑÓÊ±´¦Àí
+				// å¯¹è¿”å›çš„ç»“æœè¿›è¡Œä¸åŒçš„å»¶æ—¶å¤„ç†
 				if(res == 1){
 					Log.i("PalyGame", "run ok, sleep 500 ms");
 					try {
@@ -88,7 +88,7 @@ public class GamePlayService extends Service {
 						e.printStackTrace();
 					}
 				}else if(res <= -10){
-					// Á¬Ğø²»ÔÚÓÎÏ·10´Î£¬¹Ø±Õ
+					// è¿ç»­ä¸åœ¨æ¸¸æˆ10æ¬¡ï¼Œå…³é—­
 					stop_flag = true;
 					Log.i("PlayGame", "not game over 10, over game");
 				}else{

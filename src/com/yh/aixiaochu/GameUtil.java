@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 /**
- * °®Ïû³ıÓÎÏ·µ÷ÓÃÈë¿Ú
+ * çˆ±æ¶ˆé™¤æ¸¸æˆè°ƒç”¨å…¥å£
  * @author gudh
  * 
  */
@@ -22,13 +22,13 @@ public class GameUtil {
 	}
 	
 	/**
-	 * ½øĞĞÒ»´ÎÉ¨Ãèµã»÷
+	 * è¿›è¡Œä¸€æ¬¡æ‰«æç‚¹å‡»
 	 * 
 	 * @return
 	 */
 	public static int run_time() {
 
-		// ÆÁÄ»½ØÍ¼
+		// å±å¹•æˆªå›¾
 		Bitmap bm = getScreenBitmap();
 		
 		if(!isGamePic(bm)){
@@ -38,11 +38,11 @@ public class GameUtil {
 		}
 		
 		gameFalseTimes = 0;
-		// »ñÈ¡²½Öè
+		// è·å–æ­¥éª¤
 		List<int[][]> steps = run_py.get_step(bm);
 
 		if(steps != null){
-			// drag²½Öè
+			// dragæ­¥éª¤
 			boolean res = goSteps(steps, 0);
 			if(res){
 				gameFalseTimes = 1;
@@ -52,7 +52,7 @@ public class GameUtil {
 	}
 
 	/**
-	 * »ñÈ¡ÆÁÄ»½ØÍ¼µÄbitmap
+	 * è·å–å±å¹•æˆªå›¾çš„bitmap
 	 * 
 	 * @return
 	 */
@@ -67,14 +67,14 @@ public class GameUtil {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñ½øÈëÓÎÏ·×´Ì¬£¬ËÄ¸ö½Ç¶¼ÊÇ0
+	 * åˆ¤æ–­æ˜¯å¦è¿›å…¥æ¸¸æˆçŠ¶æ€ï¼Œå››ä¸ªè§’éƒ½æ˜¯0
 	 * @param bm
 	 * @return
 	 */
 	private static boolean isGamePic(Bitmap bm){
 		int[][] ps = {{0, 0}, {0, 853}, {479, 0}, {479, 853}};
 		for(int[] p : ps){
-			// È«ºÚÉ«
+			// å…¨é»‘è‰²
 			if(bm.getPixel(p[0], p[1]) != 0xff000000){
 				return false;
 			}
@@ -83,11 +83,11 @@ public class GameUtil {
 	}
 	
 	/**
-	 * °´²½Öè×ß
+	 * æŒ‰æ­¥éª¤èµ°
 	 * 
 	 * @param steps
 	 * @param s
-	 *            ²½Öè¼äÑÓÊ±
+	 *            æ­¥éª¤é—´å»¶æ—¶
 	 * @return
 	 */
 	private static boolean goSteps(List<int[][]> steps, int s) {

@@ -6,7 +6,7 @@ import java.util.List;
 import android.util.Log;
 
 /**
- * 资源类，存储消除信息
+ * 璧勬簮绫伙紝瀛樺偍娑堥櫎淇℃伅
  * @author gudh
  *
  */

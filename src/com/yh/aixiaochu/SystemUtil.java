@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 /**
- * ÏµÍ³´¦Àí
+ * ç³»ç»Ÿå¤„ç†
  * @author gudh
  *
  */
@@ -20,7 +20,7 @@ public class SystemUtil {
 			.getExternalStorageDirectory().getPath() + "/yhzhtk/";
 	
 	/**
-	 * µ¥»÷ÊÂ¼şÎÄ¼ş£¬²»Í¬µÄÊÖ»ú¿ÉÄÜ²»Ò»Ñù
+	 * å•å‡»äº‹ä»¶æ–‡ä»¶ï¼Œä¸åŒçš„æ‰‹æœºå¯èƒ½ä¸ä¸€æ ·
 	 */
 	public static String eventFile = "/dev/input/event1";
 	
@@ -29,7 +29,7 @@ public class SystemUtil {
 	private static BitmapFactory.Options options = null;
 	
 	/**
-	 * ³õÊ¼»¯Êı¾İ
+	 * åˆå§‹åŒ–æ•°æ®
 	 */
 	public static void init(){
 		File p = new File(screenpath);
@@ -41,7 +41,7 @@ public class SystemUtil {
 		options = new BitmapFactory.Options();
 		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 		
-		// ³õÊ¼»¯ÊÂ¼şÎÄ¼şµÄÈ¨ÏŞ
+		// åˆå§‹åŒ–äº‹ä»¶æ–‡ä»¶çš„æƒé™
 		try {
 			Process sh = Runtime.getRuntime().exec("su", null, null);
 			OutputStream os = sh.getOutputStream();
@@ -57,9 +57,9 @@ public class SystemUtil {
 	}
 
 	/**
-	 * »ñÈ¡ÆÁÄ»½ØÍ¼
+	 * è·å–å±å¹•æˆªå›¾
 	 * 
-	 * @return ½ØÍ¼Â·¾¶
+	 * @return æˆªå›¾è·¯å¾„
 	 */
 	public static String screenCap() {
 		try {
@@ -78,7 +78,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * µ¥»÷
+	 * å•å‡»
 	 * @param x
 	 * @param y
 	 */
@@ -88,7 +88,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * ÍÏ¶¯
+	 * æ‹–åŠ¨
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -100,7 +100,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * ·¢ËÍÊÂ¼ş
+	 * å‘é€äº‹ä»¶
 	 * 
 	 * @param events
 	 */
@@ -120,7 +120,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * ²âÊÔ
+	 * æµ‹è¯•
 	 * @return
 	 */
 	public static String[] getTest() {
@@ -132,7 +132,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * ÍÏ¶¯²½Öè£¬²»Í¬µÄÊÖ»ú¿ÉÄÜ²»Ò»ÖÂ
+	 * æ‹–åŠ¨æ­¥éª¤ï¼Œä¸åŒçš„æ‰‹æœºå¯èƒ½ä¸ä¸€è‡´
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -141,7 +141,7 @@ public class SystemUtil {
 	 */
 	private static String[] getDragEvents(int x1, int y1, int x2, int y2) {
 		String[] events = new String[17];
-		// µÚÒ»µã
+		// ç¬¬ä¸€ç‚¹
 		events[0] = "sendevent /dev/input/event1 3 57 0";
 		events[1] = "sendevent /dev/input/event1 3 53 " + x1;
 		events[2] = "sendevent /dev/input/event1 3 54 " + y1;
@@ -149,9 +149,9 @@ public class SystemUtil {
 		events[4] = "sendevent /dev/input/event1 3 50 2";
 		events[5] = "sendevent /dev/input/event1 0 2 0";
 		events[6] = "sendevent /dev/input/event1 0 0 0";
-		// ÑÓÊ±
+		// å»¶æ—¶
 		events[7] = "sleep 0.1";
-		// µÚ¶şµã
+		// ç¬¬äºŒç‚¹
 		events[8] = "sendevent /dev/input/event1 3 57 0";
 		events[9] = "sendevent /dev/input/event1 3 53 " + x2;
 		events[10] = "sendevent /dev/input/event1 3 54 " + y2;
@@ -159,14 +159,14 @@ public class SystemUtil {
 		events[12] = "sendevent /dev/input/event1 3 50 2";
 		events[13] = "sendevent /dev/input/event1 0 2 0";
 		events[14] = "sendevent /dev/input/event1 0 0 0";
-		// È·ÈÏ
+		// ç¡®è®¤
 		events[15] = "sendevent /dev/input/event1 0 2 0";
 		events[16] = "sendevent /dev/input/event1 0 0 0";
 		return events;
 	}
 	
 	/**
-	 * µ¥»÷²½Öè£¬²»Í¬µÄÊÖ»ú¿ÉÄÜ²»Ò»ÖÂ
+	 * å•å‡»æ­¥éª¤ï¼Œä¸åŒçš„æ‰‹æœºå¯èƒ½ä¸ä¸€è‡´
 	 * @param x
 	 * @param y
 	 * @return

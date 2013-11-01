@@ -8,18 +8,18 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
 /**
- * ÖØĞ´sendevent.c£¬Î´ÍêÉÆ£¬×Ö½ÚÁ÷»¹²»ÕıÈ·£¬ĞèÒª¸Ä½ø
+ * é‡å†™sendevent.cï¼Œæœªå®Œå–„ï¼Œå­—èŠ‚æµè¿˜ä¸æ­£ç¡®ï¼Œéœ€è¦æ”¹è¿›
  * @author gudh
  * 
  */
 public class Sendevent {
 
-	// Ê¹ÓÃnid»ñÈ¡×Ö½ÚÁ÷
+	// ä½¿ç”¨nidè·å–å­—èŠ‚æµ
 	private static ByteBuffer buffer4 = ByteBuffer.allocate(4);
 	private static ByteBuffer buffer2 = ByteBuffer.allocate(2);
 
 	/**
-	 * ¸ù¾İÃüÁîĞĞ²ÎÊı»ñÈ¡×Ö½ÚÊı×é
+	 * æ ¹æ®å‘½ä»¤è¡Œå‚æ•°è·å–å­—èŠ‚æ•°ç»„
 	 * @param arg
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class Sendevent {
 	}
 
 	/**
-	 * »ñÈ¡·¢ËÍµ½ÃüÁî£¬½á¹¹ÌåµÄ¶ÔÕÕ
+	 * è·å–å‘é€åˆ°å‘½ä»¤ï¼Œç»“æ„ä½“çš„å¯¹ç…§
 	 * @param type
 	 * @param code
 	 * @param value
@@ -68,7 +68,7 @@ public class Sendevent {
 	}
 
 	/**
-	 * ÉèÖÃÊ±¼ä£¬¸ù¾İcÓïÑÔµÄstruct¶øÀ´
+	 * è®¾ç½®æ—¶é—´ï¼Œæ ¹æ®cè¯­è¨€çš„structè€Œæ¥
 	 * 
 	 * @param bytes
 	 */
@@ -90,7 +90,7 @@ public class Sendevent {
 	}
 
 	/**
-	 * Ñ­»··¢ËÍµ¥»÷ÃüÁî²âÊÔ
+	 * å¾ªç¯å‘é€å•å‡»å‘½ä»¤æµ‹è¯•
 	 */
 	public static void TestClick() {
 		while (true) {
