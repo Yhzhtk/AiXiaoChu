@@ -15,7 +15,7 @@
 
 适用小米1S，涉及到系统输入事件，在其他手机可能会有问题，未测试过，如果有问题欢迎反馈交流。
 
-下载地址：[AiXiaochu.apk]()
+下载地址：[AiXiaochu.apk](https://github.com/Yhzhtk/AiXiaoChu/blob/master/%E7%88%B1%E6%B6%88%E9%99%A4%E5%B7%A5%E5%85%B7.apk?raw=true)
 
 适配版本： Android4.0及以上
 
