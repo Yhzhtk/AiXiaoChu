@@ -5,6 +5,11 @@ import java.util.List;
 
 import android.util.Log;
 
+/**
+ * 资源类，存储消除信息
+ * @author gudh
+ *
+ */
 public class ResBean {
 	
 	int[] start;

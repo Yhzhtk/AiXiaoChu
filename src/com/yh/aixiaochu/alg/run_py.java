@@ -6,8 +6,18 @@ import java.util.List;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+/**
+ * 算法调用模块
+ * @author gudh
+ *
+ */
 public class run_py {
 	
+	/**
+	 * 根据截图数据，获取下一步应该如何消除的步骤
+	 * @param img
+	 * @return
+	 */
 	public static List<int[][]> get_step(Bitmap img) {
 		
 		long start = System.currentTimeMillis();

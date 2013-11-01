@@ -19,6 +19,11 @@ public class SystemUtil {
 	public final static String screenpath = Environment
 			.getExternalStorageDirectory().getPath() + "/yhzhtk/";
 	
+	/**
+	 * 单击事件文件，不同的手机可能不一样
+	 */
+	public static String eventFile = "/dev/input/event1";
+	
 	private static String screenName = null;
 	private static byte[] shotCmdBytes  = null;
 	private static BitmapFactory.Options options = null;
@@ -35,6 +40,20 @@ public class SystemUtil {
 		shotCmdBytes = ("/system/bin/screencap -p " + screenName).getBytes();
 		options = new BitmapFactory.Options();
 		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		
+		// 初始化事件文件的权限
+		try {
+			Process sh = Runtime.getRuntime().exec("su", null, null);
+			OutputStream os = sh.getOutputStream();
+			os.write(("chmod 777 " + eventFile).getBytes());
+			os.flush();
+			os.close();
+			sh.waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}  
 	}
 
 	/**
@@ -113,7 +132,7 @@ public class SystemUtil {
 	}
 
 	/**
-	 * 拖动步骤
+	 * 拖动步骤，不同的手机可能不一致
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -147,7 +166,7 @@ public class SystemUtil {
 	}
 	
 	/**
-	 * 单击步骤
+	 * 单击步骤，不同的手机可能不一致
 	 * @param x
 	 * @param y
 	 * @return

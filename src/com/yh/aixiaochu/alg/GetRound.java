@@ -3,6 +3,11 @@ package com.yh.aixiaochu.alg;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 一轮一轮的操作
+ * @author gudh
+ *
+ */
 public class GetRound {
 	
 	public static int get_color(int[][] mat, int[] pos) {

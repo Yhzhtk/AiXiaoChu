@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 /**
+ * 爱消除游戏调用入口
  * @author gudh
  * 
  */

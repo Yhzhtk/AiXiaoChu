@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 消除算法，计算步骤
+ * @author gudh
+ *
+ */
 public class xcalg_py {
 
 	public static List<ResBean> calculate_step(int[][] mat) {

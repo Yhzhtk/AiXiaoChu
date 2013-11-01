@@ -8,7 +8,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
 /**
- * 重写sendevent.c
+ * 重写sendevent.c，未完善，字节流还不正确，需要改进
  * @author gudh
  * 
  */

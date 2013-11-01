@@ -3,6 +3,11 @@ package com.yh.aixiaochu.alg;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+/**
+ * 识别原始图片算法
+ * @author gudh
+ *
+ */
 public class xiaochu_py {
 
 	static int[] start_pos = { 5, 222 }; // 开始的位置

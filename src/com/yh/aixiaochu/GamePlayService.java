@@ -1,12 +1,15 @@
 package com.yh.aixiaochu;
 
-import com.yh.aixiaochu.system.Sendevent;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+/**
+ * 玩游戏的Service
+ * @author gudh
+ *
+ */
 public class GamePlayService extends Service {
 	
 	public static Play play = null;
@@ -29,10 +32,10 @@ public class GamePlayService extends Service {
 	@Override
 	public void onStart(Intent intent, int startid) {
 		Log.i("PlayGame", "onStart");
-		Sendevent.TestClick();
-//		play = new Play();
-//		play.stop_flag = false;
-//		play.start();
+		//Sendevent.TestClick();
+		play = new Play();
+		play.stop_flag = false;
+		play.start();
 		GameUtil.reset();
 	}
 	
@@ -44,23 +47,32 @@ public class GamePlayService extends Service {
 		}
 	}
 	
+	/**
+	 * 玩游戏的现场
+	 * @author gudh
+	 * 通过线程来完成循环截图模拟操作
+	 */
 	class Play extends Thread{
 		
+		// 是否停止的标志
 		public boolean stop_flag = false;
-		
 		
 		@Override
 		public void run() {
 			int res = 0;
 			long start;
 			long end;
+			
 			while(!stop_flag){
 				start = System.currentTimeMillis();
 				try{
+					// 运行一次识别模拟，返回结果
 					res = GameUtil.run_time();
 				}catch(Exception e){
 					e.printStackTrace();
 				}
+				
+				// 对返回的结果进行不同的延时处理
 				if(res == 1){
 					Log.i("PalyGame", "run ok, sleep 500 ms");
 					try {
