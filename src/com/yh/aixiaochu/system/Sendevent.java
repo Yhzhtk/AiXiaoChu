@@ -8,9 +8,10 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
 /**
- * 重写sendevent.c，未完善，字节流还不正确，需要改进
- * @author gudh
+ * 重写sendevent.c，已完善，字节流与数字顺序相反
  * 
+ * @author gudh
+ * @data 2014-01-16
  */
 public class Sendevent {
 
@@ -45,25 +46,25 @@ public class Sendevent {
 
 		// type
 		byte[] tbytes = buffer2.putShort(0, type).array();
-		bytes[8] = tbytes[0];
-		bytes[9] = tbytes[1];
+		bytes[8] = tbytes[1];
+		bytes[9] = tbytes[0];
 
 		// code
 		byte[] cbytes = buffer2.putShort(0, code).array();
-		bytes[10] = cbytes[0];
-		bytes[11] = cbytes[1];
+		bytes[10] = cbytes[1];
+		bytes[11] = cbytes[0];
 		// value
 
 		byte[] vbytes = buffer4.putInt(0, value).array();
-		bytes[12] = vbytes[0];
-		bytes[13] = vbytes[1];
-		bytes[14] = vbytes[2];
-		bytes[15] = vbytes[3];
+		bytes[12] = vbytes[3];
+		bytes[13] = vbytes[2];
+		bytes[14] = vbytes[1];
+		bytes[15] = vbytes[0];
 
-		for (byte b : bytes) {
-			System.out.print(b + " ");
-		}
-		System.out.println();
+//		for (byte b : bytes) {
+//			System.out.print(b + " ");
+//		}
+//		System.out.println();
 		return bytes;
 	}
 
@@ -89,6 +90,43 @@ public class Sendevent {
 		}
 	}
 
+	/**
+	 * event 处理事件 events中事件文件必须一样
+	 * 
+	 * @param events
+	 */
+	public static boolean onEvent(String[] events){
+		long start = System.currentTimeMillis();
+
+		String eventFile = events[0].split(" ")[1];
+		try {
+			OutputStream out = new FileOutputStream(eventFile);
+			for (String event : events) {
+				if(event.startsWith("sleep")){
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					continue;
+				}
+				byte[] bytes = getSendArgs(event);
+				out.write(bytes);
+				out.flush();
+			}
+			out.close();
+			
+			long end = System.currentTimeMillis();
+			System.out.println("use time:" + (end - start));
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	/**
 	 * 循环发送单击命令测试
 	 */
@@ -140,14 +178,14 @@ public class Sendevent {
 		events[1] = "sendevent /dev/input/event1 3 53 " + 300;
 		events[2] = "sendevent /dev/input/event1 3 54 " + 4;
 		events[3] = "sendevent /dev/input/event1 3 58 46 ";
-		events[4] = "sendevent /dev/input/event1 3 50 4";
+		events[4] = "sendevent /dev/input/event1 3 50 3";
 		events[5] = "sendevent /dev/input/event1 0 2 0";
 		events[6] = "sendevent /dev/input/event1 0 0 0";
 		events[7] = "sendevent /dev/input/event1 0 2 0";
 		events[8] = "sendevent /dev/input/event1 0 0 0";
 
 		try {
-			OutputStream out = new FileOutputStream("D:/a");
+			OutputStream out = new FileOutputStream("/dev/input/event1");
 			for (String event : events) {
 				byte[] bytes = getSendArgs(event);
 				out.write(bytes);

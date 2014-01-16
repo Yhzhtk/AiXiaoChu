@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import com.yh.aixiaochu.system.Sendevent;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -105,6 +107,16 @@ public class SystemUtil {
 	 * @param events
 	 */
 	public static boolean sendEnents(String[] events) {
+		// return onProcessEvents(events);
+		return Sendevent.onEvent(events);
+	}
+
+	/**
+	 * 启动进程处理事件
+	 * @param events
+	 * @return
+	 */
+	public static boolean onProcessEvents(String[] events){
 		try {
 			Process suProcess = Runtime.getRuntime().exec("su");  
 			DataOutputStream os = new DataOutputStream(suProcess.getOutputStream());  
@@ -118,7 +130,7 @@ public class SystemUtil {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * 测试
 	 * @return
