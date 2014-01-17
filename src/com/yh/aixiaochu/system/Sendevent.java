@@ -4,11 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
+
+import android.util.Log;
 
 /**
- * 重写sendevent.c，已完善，字节流与数字顺序相反
+ * 重写sendevent.c，已完善，字节流与数组顺序相反
  * 
  * @author gudh
  * @data 2014-01-16
@@ -18,27 +20,79 @@ public class Sendevent {
 	// 使用nid获取字节流
 	private static ByteBuffer buffer4 = ByteBuffer.allocate(4);
 	private static ByteBuffer buffer2 = ByteBuffer.allocate(2);
+	// 存储所有文件
+	private static HashMap<String, OutputStream> fileOut = new HashMap<String, OutputStream>(
+			10);
+
+	static long start, end;
 
 	/**
-	 * 根据命令行参数获取字节数组
-	 * @param arg
-	 * @return
+	 * event 处理事件
+	 * 
+	 * @param events
 	 */
-	public static byte[] getSendArgs(String arg) {
-		String[] infos = arg.split(" +");
-		System.out.println(arg);
-		return getSendArgs(Short.parseShort(infos[2]),
-				Short.parseShort(infos[3]), Integer.parseInt(infos[4]));
+	public static boolean onEvent(String[] events) {
+		start = System.currentTimeMillis();
+		try {
+			for (String event : events) {
+				String[] infos = event.split(" +");
+				if (infos[0].equals("sleep") && infos.length == 2) {
+					Log.d("SendEvent", event);
+					// sleep 则延时
+					Long t = Long.parseLong(infos[1]);
+					Thread.sleep(t);
+					continue;
+				} else if (infos[0].equals("sendevent") && infos.length == 5) {
+					Log.d("SendEvent", event);
+					// 发送事件
+					byte[] bytes = getSendArgs(Short.parseShort(infos[2]),
+							Short.parseShort(infos[3]),
+							Integer.parseInt(infos[4]));
+					OutputStream out = getOutputStream(infos[1]);
+					out.write(bytes);
+					out.flush();
+				} else {
+					Log.d("SendEvent", event + " NOT RIGHT");
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			end = System.currentTimeMillis();
+			Log.i("SendEvent", "time cost:" + (end - start));
+		}
+		return false;
+	}
+
+	/**
+	 * 循环发送单击命令测试
+	 */
+	public static void testClickTop() {
+		// run test
+		String[] events = new String[9];
+		events[0] = "sendevent /dev/input/event1 3 57 0";
+		events[1] = "sendevent /dev/input/event1 3 53 " + 300;
+		events[2] = "sendevent /dev/input/event1 3 54 " + 4;
+		events[3] = "sendevent /dev/input/event1 3 58 46 ";
+		events[4] = "sendevent /dev/input/event1 3 50 4";
+		events[5] = "sendevent /dev/input/event1 0 2 0";
+		events[6] = "sendevent /dev/input/event1 0 0 0";
+		events[7] = "sendevent /dev/input/event1 0 2 0";
+		events[8] = "sendevent /dev/input/event1 0 0 0";
+
+		onEvent(events);
 	}
 
 	/**
 	 * 获取发送到命令，结构体的对照
+	 * 
 	 * @param type
 	 * @param code
 	 * @param value
 	 * @return
 	 */
-	public static byte[] getSendArgs(short type, short code, int value) {
+	private static byte[] getSendArgs(short type, short code, int value) {
 		byte[] bytes = new byte[16];
 
 		// time
@@ -61,10 +115,10 @@ public class Sendevent {
 		bytes[14] = vbytes[1];
 		bytes[15] = vbytes[0];
 
-//		for (byte b : bytes) {
-//			System.out.print(b + " ");
-//		}
-//		System.out.println();
+		// for (byte b : bytes) {
+		// System.out.print(b + " ");
+		// }
+		// System.out.println();
 		return bytes;
 	}
 
@@ -73,7 +127,7 @@ public class Sendevent {
 	 * 
 	 * @param bytes
 	 */
-	public static void setTime(byte[] bytes) {
+	private static void setTime(byte[] bytes) {
 		long seconds = System.currentTimeMillis() / 1000;
 		int sec = (int) seconds;
 		int microseconds = (int) (System.nanoTime() % 1000000000);
@@ -91,114 +145,34 @@ public class Sendevent {
 	}
 
 	/**
-	 * event 处理事件 events中事件文件必须一样
+	 * 获取文件流
 	 * 
-	 * @param events
+	 * @param fileName
+	 * @return
 	 */
-	public static boolean onEvent(String[] events){
-		long start = System.currentTimeMillis();
-
-		String eventFile = events[0].split(" ")[1];
-		try {
-			OutputStream out = new FileOutputStream(eventFile);
-			for (String event : events) {
-				if(event.startsWith("sleep")){
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					continue;
-				}
-				byte[] bytes = getSendArgs(event);
-				out.write(bytes);
-				out.flush();
-			}
-			out.close();
-			
-			long end = System.currentTimeMillis();
-			System.out.println("use time:" + (end - start));
-			return true;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	/**
-	 * 循环发送单击命令测试
-	 */
-	public static void TestClick() {
-		while (true) {
+	private static OutputStream getOutputStream(String fileName) {
+		OutputStream stream = fileOut.get(fileName);
+		if (stream == null) {
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-
-			// run test
-			long start = System.currentTimeMillis();
-			String[] events = new String[9];
-			events[0] = "sendevent /dev/input/event1 3 57 0";
-			events[1] = "sendevent /dev/input/event1 3 53 " + 300;
-			events[2] = "sendevent /dev/input/event1 3 54 " + 4;
-			events[3] = "sendevent /dev/input/event1 3 58 46 ";
-			events[4] = "sendevent /dev/input/event1 3 50 4";
-			events[5] = "sendevent /dev/input/event1 0 2 0";
-			events[6] = "sendevent /dev/input/event1 0 0 0";
-			events[7] = "sendevent /dev/input/event1 0 2 0";
-			events[8] = "sendevent /dev/input/event1 0 0 0";
-			
-			try {
-				RandomAccessFile out = new RandomAccessFile("/dev/input/event1", "rw");
-				for (String event : events) {
-					byte[] bytes = getSendArgs(event);
-					//out.seek(0);
-					out.write(bytes);
-					
-				}
-				out.close();
+				stream = new FileOutputStream(fileName);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
+			}
+			fileOut.put(fileName, stream);
+		}
+		return stream;
+	}
+
+	/**
+	 * 关闭所有流
+	 */
+	public static void closeAllStream() {
+		for (String key : fileOut.keySet()) {
+			try {
+				fileOut.get(key).close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-			long end = System.currentTimeMillis();
-			System.out.println("use time:" + (end - start));
 		}
-	}
-
-	public static void main(String[] args) {
-		long start = System.currentTimeMillis();
-		String[] events = new String[9];
-		events[0] = "sendevent /dev/input/event1 3 57 0";
-		events[1] = "sendevent /dev/input/event1 3 53 " + 300;
-		events[2] = "sendevent /dev/input/event1 3 54 " + 4;
-		events[3] = "sendevent /dev/input/event1 3 58 46 ";
-		events[4] = "sendevent /dev/input/event1 3 50 3";
-		events[5] = "sendevent /dev/input/event1 0 2 0";
-		events[6] = "sendevent /dev/input/event1 0 0 0";
-		events[7] = "sendevent /dev/input/event1 0 2 0";
-		events[8] = "sendevent /dev/input/event1 0 0 0";
-
-		try {
-			OutputStream out = new FileOutputStream("/dev/input/event1");
-			for (String event : events) {
-				byte[] bytes = getSendArgs(event);
-				out.write(bytes);
-				out.flush();
-			}
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		long end = System.currentTimeMillis();
-		System.out.println("use time:" + (end - start));
 	}
 }

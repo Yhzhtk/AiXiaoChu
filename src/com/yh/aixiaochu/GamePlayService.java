@@ -87,8 +87,8 @@ public class GamePlayService extends Service {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				}else if(res <= -10){
-					// 连续不在游戏10次，关闭
+				}else if(res <= -60){
+					// 连续不在游戏60次，关闭
 					stop_flag = true;
 					Log.i("PlayGame", "not game over 10, over game");
 				}else{
