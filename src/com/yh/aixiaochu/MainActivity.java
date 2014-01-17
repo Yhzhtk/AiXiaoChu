@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yh.aixiaochu.R;
+import com.yh.aixiaochu.system.Screenshot;
 
 public class MainActivity extends Activity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends Activity {
 
 		// 初始化系统工具
 		SystemUtil.init();
+		Screenshot.init(this);
 		
 //		new Thread(new Runnable() {
 //			@Override

@@ -1,8 +1,10 @@
 package com.yh.aixiaochu;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.yh.aixiaochu.alg.run_py;
+import com.yh.aixiaochu.system.Screenshot;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,12 +58,40 @@ public class GameUtil {
 	 * 
 	 * @return
 	 */
-	private static Bitmap getScreenBitmap() {
+	public static Bitmap getScreenBitmap() {
+		// return getScreenBitmapByProcess();
+		return getScreenBitmapByFile();
+	}
+	
+	/**
+	 * 通过读取文件命令截图，效率更高
+	 * 
+	 * @return
+	 */
+	public static Bitmap getScreenBitmapByFile() {
+		long s = System.currentTimeMillis();
+		Bitmap bm = null;
+		try {
+			bm = Screenshot.getScreenBitmap();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		long e = System.currentTimeMillis();
+		Log.i("Time", "getScreenBitmap use " + (e - s));
+		return bm;
+	}
+
+	/**
+	 * 通过执行screencap命令截图
+	 * 
+	 * @return
+	 */
+	public static Bitmap getScreenBitmapByProcess() {
 		long s = System.currentTimeMillis();
 		String path = SystemUtil.screenCap();
 		Log.d("Screen", "screencap " + path);
 		Bitmap bm = BitmapFactory.decodeFile(path);
-		long e =System.currentTimeMillis();
+		long e = System.currentTimeMillis();
 		Log.i("Time", "getScreenBitmap use " + (e - s));
 		return bm;
 	}

@@ -162,7 +162,7 @@ public class SystemUtil {
 		events[5] = "sendevent /dev/input/event1 0 2 0";
 		events[6] = "sendevent /dev/input/event1 0 0 0";
 		// 延时
-		events[7] = "sleep 0.1";
+		events[7] = "sleep 100";
 		// 第二点
 		events[8] = "sendevent /dev/input/event1 3 57 0";
 		events[9] = "sendevent /dev/input/event1 3 53 " + x2;
