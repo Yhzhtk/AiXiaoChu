@@ -19,6 +19,11 @@ public class run_py {
 	 * @return
 	 */
 	public static List<int[][]> get_step(Bitmap img) {
+		// 设置参数
+		if(!xiaochu_py.setGamePara(img)){
+			Log.i("Para", "para is not set ok");
+			return null;
+		}
 		
 		long start = System.currentTimeMillis();
 		int[][] mat = xiaochu_py.get_pic_info(img);

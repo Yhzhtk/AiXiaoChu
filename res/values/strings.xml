@@ -3,6 +3,7 @@
 
     <string name="app_name">爱消除工具</string>
     <string name="action_settings">设置</string>
+     <string name="action_exit">关闭</string>
     <string name="runtext">当前状态：正在运行，单击停止</string>
     <string name="clicktext">点我</string>
     <string name="noruntext">当前状态：未运行，单击运行</string>

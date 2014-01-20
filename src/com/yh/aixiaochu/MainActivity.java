@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,6 +58,24 @@ public class MainActivity extends Activity {
 			// 未运行切花到运行
 			startService(new Intent(this, GamePlayService.class));
 			s.setText(getResources().getString(R.string.runtext));
+		}
+	}
+	
+
+	/**
+	 * 菜单选择处理
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_exit:
+			stopService(new Intent(this, GamePlayService.class));
+			this.finish();
+			System.exit(0);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }

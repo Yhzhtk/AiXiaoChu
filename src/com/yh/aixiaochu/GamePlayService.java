@@ -63,6 +63,8 @@ public class GamePlayService extends Service {
 			long start;
 			long end;
 			
+			int zeroTimes = 0;
+			
 			while(!stop_flag){
 				start = System.currentTimeMillis();
 				try{
@@ -70,6 +72,12 @@ public class GamePlayService extends Service {
 					res = GameUtil.run_time();
 				}catch(Exception e){
 					e.printStackTrace();
+				}
+				
+				if(res == 0){
+					zeroTimes++;
+				} else{
+					zeroTimes = 0;
 				}
 				
 				// 对返回的结果进行不同的延时处理
@@ -87,7 +95,7 @@ public class GamePlayService extends Service {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				}else if(res <= -60){
+				}else if(res <= -10 || zeroTimes >= 10){
 					// 连续不在游戏60次，关闭
 					stop_flag = true;
 					Log.i("PlayGame", "not game over 10, over game");

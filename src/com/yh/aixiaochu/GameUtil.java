@@ -102,14 +102,17 @@ public class GameUtil {
 	 * @return
 	 */
 	private static boolean isGamePic(Bitmap bm){
-		int[][] ps = {{0, 0}, {0, 853}, {479, 0}, {479, 853}};
-		for(int[] p : ps){
-			// 全黑色
-			if(bm.getPixel(p[0], p[1]) != 0xff000000){
-				return false;
-			}
-		}
 		return true;
+//		int w = bm.getWidth();
+//		int h = bm.getHeight();
+//		int[][] ps = {{0, 0}, {0, h - 1}, {w - 1, 0}, {w - 1, h - 1}};
+//		for(int[] p : ps){
+//			// 全黑色
+//			if(bm.getPixel(p[0], p[1]) != 0xff000000){
+//				return false;
+//			}
+//		}
+//		return true;
 	}
 	
 	/**
