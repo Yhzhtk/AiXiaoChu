@@ -1,7 +1,6 @@
 package com.yh.aixiaochu;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,16 +46,23 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public GamePlay plays = new GamePlay();
+	
 	public void btnClick(View view) {
 		TextView s = (TextView) findViewById(R.id.statusView);
 		String status = s.getText().toString();
 		if (status.equals(getResources().getString(R.string.runtext))) {
 			// 正在运行切换到不运行
-			stopService(new Intent(this, GamePlayService.class));
+			// stopService(new Intent(this, GamePlayService.class));
+			if(plays != null){
+				plays.stopPlay();
+			}
 			s.setText(getResources().getString(R.string.noruntext));
 		} else {
 			// 未运行切花到运行
-			startService(new Intent(this, GamePlayService.class));
+			// startService(new Intent(this, GamePlayService.class));
+			plays = new GamePlay();
+			plays.start();
 			s.setText(getResources().getString(R.string.runtext));
 		}
 	}
@@ -70,7 +76,9 @@ public class MainActivity extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_exit:
-			stopService(new Intent(this, GamePlayService.class));
+			if(plays != null){
+				plays.stopPlay();
+			}
 			this.finish();
 			System.exit(0);
 			return true;

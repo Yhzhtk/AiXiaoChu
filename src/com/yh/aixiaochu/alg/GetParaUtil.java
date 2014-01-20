@@ -54,7 +54,13 @@ public class GetParaUtil {
 	 * @return 
 	 */
 	public static GameParaBean analyRect1(Bitmap img) {
-		int startY = analyStartY(img);
+		int startY = 222;
+		if(img.getHeight() == 854){
+			startY = 222;
+		} else if(img.getHeight() == 1280){
+			startY = 333;
+		}
+		
 		if(startY >= height / 2){
 			Log.i("SetGamePara", "startY not right:" + startY);
 			return null;

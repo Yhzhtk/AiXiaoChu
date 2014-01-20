@@ -49,6 +49,8 @@ public class GameUtil {
 			if(res){
 				gameFalseTimes = 1;
 			}
+		} else{
+			gameFalseTimes = -1;
 		}
 		return gameFalseTimes;
 	}

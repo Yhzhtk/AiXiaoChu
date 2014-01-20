@@ -32,6 +32,10 @@ public class run_py {
 		}
 		
 		List<ResBean> res = xcalg_py.calculate_step(mat);
+		if(res == null){
+			return null;
+		}
+		
 		for (ResBean r : res) {
 			r.print();
 		}
