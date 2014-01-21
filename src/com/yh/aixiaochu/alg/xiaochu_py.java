@@ -82,7 +82,7 @@ public class xiaochu_py {
 			}
 		}
 		print_mat(mat);
-		if (blank_c > 7) {
+		if (blank_c > 12) {
 			log("Blank", "blank is " +  blank_c + ", return None");
 			mat = null;
 		}

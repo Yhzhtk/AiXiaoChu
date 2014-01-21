@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yh.aixiaochu.R;
+import com.yh.aixiaochu.system.PhoneInfo;
 import com.yh.aixiaochu.system.Screenshot;
+import com.yh.aixiaochu.system.PhoneInfo.PHONE;
 
 public class MainActivity extends Activity {
 
@@ -20,6 +22,8 @@ public class MainActivity extends Activity {
 		// 设置可截屏
 		getWindow().getDecorView().setDrawingCacheEnabled(true);
 
+		PhoneInfo.init(PHONE.miOne);
+		
 		// 初始化系统工具
 		SystemUtil.init();
 		Screenshot.init(this);
@@ -28,7 +32,8 @@ public class MainActivity extends Activity {
 //			@Override
 //			public void run() {
 //				while (true) {
-//					SystemUtil.screenCap();
+//					String[] click = EventGetter.getDragEvents(518, 543, 100, 545);
+//					Sendevent.onEvent(click);
 //					try {
 //						Thread.sleep(2000);
 //					} catch (InterruptedException e) {

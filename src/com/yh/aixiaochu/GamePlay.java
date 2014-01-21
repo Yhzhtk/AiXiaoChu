@@ -34,7 +34,7 @@ public class GamePlay extends Thread{
 			
 			// 对返回的结果进行不同的延时处理
 			if(res == 1){
-				Log.i("PalyGame", "run ok, sleep 500 ms");
+				Log.i("PalyGame", "run ok, sleep 50 ms");
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
@@ -47,14 +47,14 @@ public class GamePlay extends Thread{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}else if(res <= -30){
+			}else if(res <= -60){
 				// 连续不在游戏30次，关闭
 				stop_flag = true;
-				Log.i("PlayGame", "not game over 30, over game");
+				Log.i("PlayGame", "not game over 60, over game");
 			}else{
-				Log.i("PalyGame", "not in game, sleep 1000 ms, now is " + res);
+				Log.i("PalyGame", "not in game, sleep 500 ms, now is " + res);
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

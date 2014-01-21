@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.yh.aixiaochu.alg.run_py;
+import com.yh.aixiaochu.system.PhoneInfo;
 import com.yh.aixiaochu.system.Screenshot;
 
 import android.graphics.Bitmap;
@@ -62,8 +63,13 @@ public class GameUtil {
 	 * @return
 	 */
 	public static Bitmap getScreenBitmap() {
-		// return getScreenBitmapByProcess();
-		return getScreenBitmapByFile();
+		switch(PhoneInfo.usePhone){
+		case miOne:
+			return getScreenBitmapByFile();
+		case huaweiHonor:
+			return getScreenBitmapByProcess(); 
+		}
+		return null;
 	}
 	
 	/**

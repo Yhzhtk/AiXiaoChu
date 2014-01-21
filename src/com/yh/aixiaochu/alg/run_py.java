@@ -47,7 +47,7 @@ public class run_py {
 			// 坐标和序号是反的
 			int[] m = xiaochu_py.get_rc_pos(r.start);
 			int[] n = xiaochu_py.get_rc_pos(r.end);
-			Log.i("Res", new StringBuffer().append(m[0]).append(" ").append(m[1]).append("    ").append(m[0]).append(" ").append(m[1]).toString());
+			Log.i("Res", new StringBuffer().append(m[0]).append(" ").append(m[1]).append("    ").append(n[0]).append(" ").append(n[1]).toString());
 			pos.add(new int[][] { m, n });
 		}
 		

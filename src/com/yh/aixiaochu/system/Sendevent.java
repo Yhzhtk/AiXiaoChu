@@ -66,25 +66,6 @@ public class Sendevent {
 	}
 
 	/**
-	 * 循环发送单击命令测试
-	 */
-	public static void testClickTop() {
-		// run test
-		String[] events = new String[9];
-		events[0] = "sendevent /dev/input/event1 3 57 0";
-		events[1] = "sendevent /dev/input/event1 3 53 " + 300;
-		events[2] = "sendevent /dev/input/event1 3 54 " + 4;
-		events[3] = "sendevent /dev/input/event1 3 58 46 ";
-		events[4] = "sendevent /dev/input/event1 3 50 4";
-		events[5] = "sendevent /dev/input/event1 0 2 0";
-		events[6] = "sendevent /dev/input/event1 0 0 0";
-		events[7] = "sendevent /dev/input/event1 0 2 0";
-		events[8] = "sendevent /dev/input/event1 0 0 0";
-
-		onEvent(events);
-	}
-
-	/**
 	 * 获取发送到命令，结构体的对照
 	 * 
 	 * @param type
