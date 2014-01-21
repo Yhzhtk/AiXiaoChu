@@ -17,10 +17,10 @@ import android.util.Log;
  */
 public class GameUtil {
 	
-	private static int gameFalseTimes = 0;
+	private static int gameTrueTimes = 0;
 	
 	public static void reset(){
-		gameFalseTimes = 0;
+		gameTrueTimes = 0;
 	}
 	
 	/**
@@ -34,12 +34,11 @@ public class GameUtil {
 		Bitmap bm = getScreenBitmap();
 		
 		if(!isGamePic(bm)){
-			gameFalseTimes--;
-			Log.d("Judge", "pic is not game screen, now false time is " + gameFalseTimes);
-			return gameFalseTimes;
+			gameTrueTimes--;
+			Log.d("Judge", "pic is not game screen, now false time is " + gameTrueTimes);
+			return gameTrueTimes;
 		}
 		
-		gameFalseTimes = 0;
 		// 获取步骤
 		List<int[][]> steps = run_py.get_step(bm);
 
@@ -47,12 +46,14 @@ public class GameUtil {
 			// drag步骤
 			boolean res = goSteps(steps, 0);
 			if(res){
-				gameFalseTimes = 1;
+				gameTrueTimes = 1;
+			} else{
+				gameTrueTimes = 0;
 			}
 		} else{
-			gameFalseTimes = -1;
+			gameTrueTimes--;
 		}
-		return gameFalseTimes;
+		return gameTrueTimes;
 	}
 
 	/**

@@ -55,9 +55,9 @@ public class GetParaUtil {
 	 */
 	public static GameParaBean analyRect1(Bitmap img) {
 		int startY = 222;
-		if(img.getHeight() == 854){
+		if(height == 854){
 			startY = 222;
-		} else if(img.getHeight() == 1280){
+		} else if(height == 1280){
 			startY = 333;
 		}
 		
@@ -72,7 +72,7 @@ public class GetParaUtil {
 		int ry = (int) ((float)28 / 67 * blockSize);
 		
 		GameParaBean para = new GameParaBean();
-		para.start_pos = new int[]{startX, 222};
+		para.start_pos = new int[]{startX, startY};
 		para.block_size = new int[]{blockSize, blockSize};
 		para.rel_pos = new int[]{rx, ry};
 		

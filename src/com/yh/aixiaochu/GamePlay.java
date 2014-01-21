@@ -21,8 +21,7 @@ public class GamePlay extends Thread{
 		int res = 0;
 		long start;
 		long end;
-		
-		int zeroTimes = 0;
+		GameUtil.reset();
 		
 		while(!stop_flag){
 			start = System.currentTimeMillis();
@@ -31,18 +30,6 @@ public class GamePlay extends Thread{
 				res = GameUtil.run_time();
 			}catch(Exception e){
 				e.printStackTrace();
-			}
-			
-			if(res == -1){
-				zeroTimes++;
-			} else{
-				zeroTimes = 0;
-			}
-			
-			if(zeroTimes >= 30){
-				// 连续不在游戏30次，关闭
-				stop_flag = true;
-				Log.i("PlayGame", "not game over 30, over game");
 			}
 			
 			// 对返回的结果进行不同的延时处理
